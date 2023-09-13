@@ -131,7 +131,7 @@ export const RegisterUser: React.FC = () => {
       <Form.Item
         label="Género"
         name="genero"
-        rules={[{ required: true, message: "Seleccione su género" }]}
+        rules={[{ required: false, message: "Seleccione su género" }]}
       >
         <Select showSearch>
           <Option value="male">Masculino</Option>
@@ -142,7 +142,7 @@ export const RegisterUser: React.FC = () => {
         label="Fecha de Nacimiento"
         name="fechaNacimiento"
         rules={[
-          { required: true, message: "Seleccione su fecha de nacimiento", type: 'date' },
+          { required: false, message: "Seleccione su fecha de nacimiento", type: 'date' },
         ]}
       >
         <DatePicker placeholder="YYYY-MM-DD" />
@@ -159,7 +159,7 @@ export const RegisterUser: React.FC = () => {
       <Form.Item
         label="EPS"
         name="eps"
-        rules={[{ required: true, message: "Seleccione su EPS" }]}
+        rules={[{ required: false, message: "Seleccione su EPS" }]}
       >
         <Select showSearch>
           {epsOptions.map((eps) => (
@@ -195,7 +195,7 @@ export const RegisterUser: React.FC = () => {
         name="contactoEmergenciaNombre"
         rules={[
           {
-            required: true,
+            required: false,
             message: "Ingrese el nombre del contacto de emergencia",
           },
         ]}
@@ -207,7 +207,7 @@ export const RegisterUser: React.FC = () => {
         name="contactoEmergenciaCelular"
         rules={[
           {
-            required: true,
+            required: false,
             message: "Ingrese el teléfono del contacto de emergencia",
           },
         ]}
