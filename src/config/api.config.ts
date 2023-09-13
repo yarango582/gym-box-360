@@ -1,6 +1,6 @@
 
 export const API_CONFIG = {
-    baseUrl: import.meta.env.BASE_URL,
+    baseUrl: import.meta.env.VITE_APP_BASE_URL,
     endpoints: {
         getAffiliates: {
             method: 'GET',
