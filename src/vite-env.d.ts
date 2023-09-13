@@ -1,3 +1,3 @@
 /// <reference types="vite/client" />
 
-VITE_APP_BASE_URL = 'http://localhost:3000'
+VITE_APP_BASE_URL = 'https://api-gymbox360.zeabur.app/';

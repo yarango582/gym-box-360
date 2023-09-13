@@ -2,6 +2,7 @@ import React from "react";
 import { ResponsiveForm } from "./index";
 import { Form, Input, Select, DatePicker } from "antd";
 import { IAffiliate } from "../interfaces";
+import { API_CONFIG } from "../config/api.config";
 
 const { Option } = Select;
 
@@ -53,9 +54,10 @@ const onFinish = (values: IAffiliate) => {
     fechaNacimiento,
   }
 
-  const url = "http://localhost:3000/api/v1/affiliates";
+  const url = API_CONFIG.baseUrl + API_CONFIG.endpoints.setAffiliate.url;
+
   const options = {
-    method: "POST",
+    method: API_CONFIG.endpoints.setAffiliate.method,
     headers: {
       "Content-Type": "application/json",
     },
