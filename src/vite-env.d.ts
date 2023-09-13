@@ -1,3 +1,10 @@
 /// <reference types="vite/client" />
 
-VITE_APP_BASE_URL = 'https://api-gymbox360.zeabur.app/';
+interface ImportMetaEnv {
+    readonly VITE_APP_TITLE: string
+    readonly VITE_APP_BASE_URL: string
+}
+
+interface ImportMeta {
+    readonly env: ImportMetaEnv
+}
