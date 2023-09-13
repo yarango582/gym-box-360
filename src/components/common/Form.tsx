@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Form, Input, Button, Row, Col } from "antd";
+import { Form, Button, Row, Col } from "antd";
 
 const { Item } = Form;
 

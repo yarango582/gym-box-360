@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, MenuProps, theme } from 'antd';
 import { RegisterUser, menuOptions, MenuOption, LoginUser } from './components';
 
