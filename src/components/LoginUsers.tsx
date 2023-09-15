@@ -14,7 +14,6 @@ export const LoginUser: React.FC = () => {
   }
 
   const onFinish = (values: IAssistance) => {
-    console.log("Success:", values);
     const today = new Date();
     const assistance: IAssistance = {
       ...values,
@@ -30,7 +29,12 @@ export const LoginUser: React.FC = () => {
       body: JSON.stringify(assistance),
     };
     fetch(url, options)
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.statusText !== "OK") {
+          alert(`Error al ingresar el afiliado: ${response.statusText}}`);
+        }
+        return response.json();
+      })
       .then(() => {
         alert("Afiliado ingreso correctamente");
         resetForm();
