@@ -65,7 +65,13 @@ const onFinish = (values: IAffiliate) => {
   };
 
   fetch(url, options)
-    .then((response) => response.json())
+    .then((response) => {
+      // use the response message to show the user a message??
+      if (response.statusText !== "OK") {
+        alert(`Error al registrar el afiliado: ${response.statusText}}`);
+      }
+      return response.json();
+    })
     .then(() => {
       alert("Afiliado registrado correctamente");
       resetForm();

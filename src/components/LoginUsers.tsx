@@ -14,6 +14,7 @@ export const LoginUser: React.FC = () => {
   }
 
   const onFinish = (values: IAssistance) => {
+    console.log("Success:", values);
     const today = new Date();
     const assistance: IAssistance = {
       ...values,
@@ -47,7 +48,7 @@ export const LoginUser: React.FC = () => {
       buttonOptions={{
         title: "Login",
         type: "primary",
-        htmlType: "button",
+        htmlType: "submit",
         text: "Registrar ingreso",
       }}
       onFinish={onFinish}
