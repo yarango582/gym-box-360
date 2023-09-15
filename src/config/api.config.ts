@@ -9,6 +9,10 @@ export const API_CONFIG = {
         setAffiliate: {
             method: 'POST',
             url: '/api/v1/affiliates'
+        },
+        setAssistance: {
+            method: 'POST',
+            url: '/api/v1/assistance'
         }
     }
 }
