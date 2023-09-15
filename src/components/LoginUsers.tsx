@@ -3,15 +3,15 @@ import { ResponsiveForm } from "./index";
 import { Form, Input } from "antd";
 import { IAssistance } from "../interfaces/assistance.interface";
 import { API_CONFIG } from "../config/api.config";
+import { IResponse } from "../interfaces/api.interface";
 
 export const LoginUser: React.FC = () => {
-
   const resetForm = () => {
-    const documentField = document.getElementById("document");
+    const documentField = document.getElementById("numeroDocumento");
     if (documentField) {
       (documentField as HTMLInputElement).value = "";
     }
-  }
+  };
 
   const onFinish = (values: IAssistance) => {
     const today = new Date();
@@ -20,7 +20,8 @@ export const LoginUser: React.FC = () => {
       fechaDeAsistencia: today,
     };
 
-    const url = API_CONFIG.baseUrl + API_CONFIG.endpoints.setAssistance.url;
+    const url = `${API_CONFIG.baseUrl}${API_CONFIG.endpoints.setAssistance.url}`;
+
     const options = {
       method: API_CONFIG.endpoints.setAssistance.method,
       headers: {
@@ -28,22 +29,21 @@ export const LoginUser: React.FC = () => {
       },
       body: JSON.stringify(assistance),
     };
+
     fetch(url, options)
       .then((response) => {
-        if (response.statusText !== "OK") {
-          alert(`Error al ingresar el afiliado: ${response.statusText}}`);
-        }
         return response.json();
       })
-      .then(() => {
-        alert("Afiliado ingreso correctamente");
-        resetForm();
+      .then((response: IResponse) => {
+        if (response.success === true) {
+          alert(response.message);
+          resetForm();
+        } else {
+          alert(response.message);
+        }
       })
       .catch((error) => {
-        console.error("Error:", error);
-        alert(
-          `Error al ingresar el afiliado, revisa el documento, tambien recuerda que solo puedes registrar asistencia una vez al dia`
-        );
+        alert(error);
       });
   };
 
@@ -60,7 +60,7 @@ export const LoginUser: React.FC = () => {
       <Form.Item
         id="document"
         label="Numero de documento"
-        name="document"
+        name="numeroDocumento"
         rules={[{ required: true, message: "Ingrese su numero de documento" }]}
       >
         <Input type="number" />

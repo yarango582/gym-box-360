@@ -3,6 +3,7 @@ import { ResponsiveForm } from "./index";
 import { Form, Input, Select, DatePicker } from "antd";
 import { IAffiliate } from "../interfaces";
 import { API_CONFIG } from "../config/api.config";
+import { IResponse } from "../interfaces/api.interface";
 
 const { Option } = Select;
 
@@ -54,7 +55,7 @@ const onFinish = (values: IAffiliate) => {
     fechaNacimiento,
   }
 
-  const url = API_CONFIG.baseUrl + API_CONFIG.endpoints.setAffiliate.url;
+  const url = `${API_CONFIG.baseUrl}${API_CONFIG.endpoints.setAffiliate.url}`;
 
   const options = {
     method: API_CONFIG.endpoints.setAffiliate.method,
@@ -66,19 +67,18 @@ const onFinish = (values: IAffiliate) => {
 
   fetch(url, options)
     .then((response) => {
-      // use the response message to show the user a message??
-      if (response.statusText !== "OK") {
-        alert(`Error al registrar el afiliado: ${response.statusText}}`);
-      }
       return response.json();
     })
-    .then(() => {
-      alert("Afiliado registrado correctamente");
-      resetForm();
+    .then((response: IResponse) => {
+      if (response.success) {
+        alert(response.message);
+        resetForm();
+      } else {
+        alert(response.message);
+      }
     })
     .catch((error) => {
-      console.error(error);
-      alert("Error al registrar el afiliado");
+      alert(error);
     });
 
 };
