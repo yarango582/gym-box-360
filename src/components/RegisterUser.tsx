@@ -1,9 +1,9 @@
 import React from "react";
-import { ResponsiveForm } from "./index";
 import { Form, Input, Select, DatePicker } from "antd";
 import { IAffiliate } from "../interfaces";
 import { API_CONFIG } from "../config/api.config";
 import { IResponse } from "../interfaces/api.interface";
+import { ResponsiveForm } from "./common/Form";
 
 const { Option } = Select;
 
@@ -55,10 +55,10 @@ const onFinish = (values: IAffiliate) => {
     fechaNacimiento,
   }
 
-  const url = `${API_CONFIG.baseUrl}${API_CONFIG.endpoints.setAffiliate.url}`;
+  const { method, url } = API_CONFIG.endpoints.setAffiliate;
 
   const options = {
-    method: API_CONFIG.endpoints.setAffiliate.method,
+    method,
     headers: {
       "Content-Type": "application/json",
     },

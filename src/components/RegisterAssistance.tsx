@@ -1,11 +1,11 @@
 import React from "react";
-import { ResponsiveForm } from "./index";
 import { Form, Input } from "antd";
 import { IAssistance } from "../interfaces/assistance.interface";
 import { API_CONFIG } from "../config/api.config";
 import { IResponse } from "../interfaces/api.interface";
+import { ResponsiveForm } from "./common/Form";
 
-export const LoginUser: React.FC = () => {
+export const RegisterAssistance: React.FC = () => {
   const resetForm = () => {
     const documentField = document.getElementById("numeroDocumento");
     if (documentField) {
@@ -20,10 +20,10 @@ export const LoginUser: React.FC = () => {
       fechaDeAsistencia: today,
     };
 
-    const url = `${API_CONFIG.baseUrl}${API_CONFIG.endpoints.setAssistance.url}`;
+    const { method, url } = API_CONFIG.endpoints.setAssistance;
 
     const options = {
-      method: API_CONFIG.endpoints.setAssistance.method,
+      method,
       headers: {
         "Content-Type": "application/json",
       },
