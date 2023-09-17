@@ -1,5 +1,6 @@
 
 export interface IAffiliate {
+    _id?: string;
     tipoDocumento: string;
     numeroDocumento: number;
     nombreCompleto: string;

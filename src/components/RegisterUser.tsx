@@ -40,50 +40,45 @@ const horariosOptions = [
   "9 pm - 10 pm",
 ];
 
-const resetForm = () => {
-  window.location.reload();
-}
-
-const onFinish = (values: IAffiliate) => {
-
-  const fechaIngreso = new Date(values.fechaIngreso);
-  const fechaNacimiento = new Date(values.fechaNacimiento);
-
-  const affiliate: IAffiliate = {
-    ...values,
-    fechaIngreso,
-    fechaNacimiento,
-  }
-
-  const { method, url } = API_CONFIG.endpoints.setAffiliate;
-
-  const options = {
-    method,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(affiliate),
-  };
-
-  fetch(url, options)
-    .then((response) => {
-      return response.json();
-    })
-    .then((response: IResponse) => {
-      if (response.success) {
-        alert(response.message);
-        resetForm();
-      } else {
-        alert(response.message);
-      }
-    })
-    .catch((error) => {
-      alert(error);
-    });
-
-};
-
 export const RegisterUser: React.FC = () => {
+
+  const onFinish = (values: IAffiliate) => {
+
+    const fechaIngreso = new Date(values.fechaIngreso);
+    const fechaNacimiento = new Date(values.fechaNacimiento);
+
+    const affiliate: IAffiliate = {
+      ...values,
+      fechaIngreso,
+      fechaNacimiento,
+    }
+
+    const { method, url } = API_CONFIG.endpoints.setAffiliate;
+
+    const options = {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(affiliate),
+    };
+
+    fetch(url, options)
+      .then((response) => {
+        return response.json();
+      })
+      .then((response: IResponse) => {
+        if (response.success) {
+          alert(response.message);
+        } else {
+          alert(response.message);
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+
+  };
   return (
     <ResponsiveForm
       buttonOptions={{

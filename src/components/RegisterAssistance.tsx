@@ -6,12 +6,7 @@ import { IResponse } from "../interfaces/api.interface";
 import { ResponsiveForm } from "./common/Form";
 
 export const RegisterAssistance: React.FC = () => {
-  const resetForm = () => {
-    const documentField = document.getElementById("numeroDocumento");
-    if (documentField) {
-      (documentField as HTMLInputElement).value = "";
-    }
-  };
+
 
   const onFinish = (values: IAssistance) => {
     const today = new Date();
@@ -37,7 +32,6 @@ export const RegisterAssistance: React.FC = () => {
       .then((response: IResponse) => {
         if (response.success === true) {
           alert(response.message);
-          resetForm();
         } else {
           alert(response.message);
         }

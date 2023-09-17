@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Breadcrumb, Layout, theme, Menu, Row, Col } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { RegisterAssistance, RegisterUser } from './components';
+import { RegisterAssistance, RegisterPayment, RegisterSuscription, RegisterUser } from './components';
 import { menuOptions } from './components/common/menuOptions';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,6 +27,10 @@ const App: React.FC = () => {
       case '2':
         return <RegisterAssistance />;
       case '3':
+        return <RegisterSuscription />;
+      case '4':
+        return <RegisterPayment />;
+      case '5':
         window.localStorage.removeItem('isLogged');
     }
   };

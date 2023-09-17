@@ -4,3 +4,5 @@ export * from './Home';
 export * from './Login';
 export * from './RegisterAssistance';
 export * from './RegisterUser';
+export * from './RegisterSuscription';
+export * from './RegisterPayment';

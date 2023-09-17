@@ -32,8 +32,15 @@ export const ResponsiveForm: React.FC<FormProps> = ({
     (child) => React.isValidElement(child) && child.type === Item
   );
 
+  const [form] = Form.useForm();
+
+  const handleFinish = (values: any) => {
+    onFinish(values);
+    form.resetFields();
+  };
+
   return (
-    <Form  onFinish={onFinish} layout="vertical">
+    <Form onFinish={handleFinish} layout="vertical" form={form}>
       <Row gutter={16}>
         {formItems.map((FormItem, index) => (
           <Col key={index} xs={24} sm={24} md={24} lg={24}>

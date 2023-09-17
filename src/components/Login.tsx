@@ -3,6 +3,7 @@ import logo from '../assets/img/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { API_CONFIG } from '../config/api.config';
 import { IResponse } from '../interfaces/api.interface';
+import { useEffect } from 'react';
 
 type FieldType = {
     numeroDocumento?: string;
@@ -37,6 +38,13 @@ export const Login = () => {
                 console.error('Error:', error);
             });
     };
+
+    useEffect(() => {
+        const isLogged = localStorage.getItem('isLogged');
+        if (isLogged) {
+            navigate('/dashboard');
+        }
+    }, [navigate]);
 
     return (
         <div style={{

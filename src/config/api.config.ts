@@ -18,6 +18,14 @@ export const API_CONFIG = {
         setAssistance: {
             method: 'POST',
             url: `${BASE_URL}/api/v1/assistance`
+        },
+        setAffiliatesSuscription: {
+            method: 'POST',
+            url: `${BASE_URL}/api/v1/affiliatesSuscription`
+        },
+        setPayments: {
+            method: 'POST',
+            url: `${BASE_URL}/api/v1/payments`
         }
     }
 }
