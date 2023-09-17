@@ -5,8 +5,8 @@ import { API_CONFIG } from '../config/api.config';
 import { IResponse } from '../interfaces/api.interface';
 
 type FieldType = {
-    username?: string;
-    password?: string;
+    numeroDocumento?: string;
+    contrasena?: string;
 };
 
 export const Login = () => {
@@ -44,7 +44,7 @@ export const Login = () => {
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
-            background: "linear-gradient(to bottom right, blue 10%, transparent 50%)"
+            background: "linear-gradient(to bottom right, #070A2E 30%, #059FFF 30%)"
         }}>
             <Form
                 name="basic"

@@ -48,6 +48,8 @@ const App: React.FC = () => {
         return <RegisterUser />;
       case '2':
         return <RegisterAssistance />;
+      case '3':
+        window.localStorage.removeItem('isLogged');
     }
   };
 

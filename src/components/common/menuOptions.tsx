@@ -1,4 +1,4 @@
-import { PieChartOutlined, DesktopOutlined } from '@ant-design/icons';
+import { PieChartOutlined, DesktopOutlined, LogoutOutlined } from '@ant-design/icons';
 import { ReactElement } from 'react';
 
 export interface MenuOption {
@@ -18,4 +18,9 @@ export const menuOptions: MenuOption[] = [
     label: 'Ingreso de afiliados',
     icon: <DesktopOutlined />,
   },
+  {
+    key: '3',
+    label: 'Cerrar sesión',
+    icon: <LogoutOutlined />,
+  }
 ];
