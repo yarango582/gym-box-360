@@ -15,4 +15,5 @@ export interface IAffiliate {
     contactoEmergenciaNombre: string;
     contactoEmergenciaCelular: number;
     horarioElegido: string;
+    diasDeCortesia?: number;
 }
