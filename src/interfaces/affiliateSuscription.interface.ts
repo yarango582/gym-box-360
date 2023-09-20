@@ -4,4 +4,5 @@ export interface IAffiliateSuscription {
     fechaDePago: Date;
     medioDePago: string;
     activo: boolean;
+    valorDePago: number;
 }

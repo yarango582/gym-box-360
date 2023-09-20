@@ -42,6 +42,7 @@ export const RegisterSuscription: React.FC = () => {
       fechaDePago: values.fechaDePago,
       medioDePago: values.medioDePago,
       activo: true,
+      valorDePago: values.valorDePago,
     }
     const options = {
       method,
@@ -115,6 +116,13 @@ export const RegisterSuscription: React.FC = () => {
           <Select.Option value="efectivo">Efectivo</Select.Option>
           <Select.Option value="otro">Otro</Select.Option>
         </Select>
+      </Form.Item>
+      <Form.Item
+        label="Valor"
+        name="valorDePago"
+        rules={[{ required: true, message: "Ingrese el valor", type: "number" }]}
+      >
+        <Input type="number" />
       </Form.Item>
     </ResponsiveForm>
   );
