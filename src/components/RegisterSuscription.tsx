@@ -90,7 +90,7 @@ export const RegisterSuscription: React.FC = () => {
             affiliates.map((affiliate: IAffiliate) => {
               return (
                 <Select.Option key={affiliate._id} value={`${affiliate._id || ""}-${affiliate.nombreCompleto}`}>
-                  {affiliate.nombreCompleto}
+                  {affiliate.numeroDocumento}-{affiliate.nombreCompleto}
                 </Select.Option>
               );
             })
