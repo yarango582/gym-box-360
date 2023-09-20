@@ -120,7 +120,7 @@ export const RegisterSuscription: React.FC = () => {
       <Form.Item
         label="Valor"
         name="valorDePago"
-        rules={[{ required: true, message: "Ingrese el valor", type: "number" }]}
+        rules={[{ required: true, message: "Ingrese el valor" }]}
       >
         <Input type="number" />
       </Form.Item>
