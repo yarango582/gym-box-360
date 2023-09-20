@@ -231,7 +231,6 @@ export const RegisterUser: React.FC = () => {
       <Form.Item
         label="Dias de Cortesía"
         name="diasDeCortesia"
-        rules={[{ required: false, message: "Seleccione sus días de cortesía", type: 'number' }]}
       >
         <Select showSearch>
           <Option value="1">1</Option>
