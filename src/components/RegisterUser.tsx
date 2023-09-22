@@ -247,7 +247,7 @@ export const RegisterUser: React.FC = () => {
         rules={[{ required: true, message: "Ingrese la sede a la que pertenece" }]}
       >
         <Select showSearch>
-          <Option value="jamundi">Jamuindi</Option>
+          <Option value="jamundi">Jamundi</Option>
           <Option value="pobladoCampestre">Poblado Campestre</Option>
           <Option value="casona">Casona</Option>
         </Select>
