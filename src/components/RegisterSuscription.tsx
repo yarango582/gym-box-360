@@ -5,6 +5,7 @@ import { IResponse } from "../interfaces/api.interface";
 import { ResponsiveForm } from "./common/Form";
 import { IAffiliate } from "../interfaces";
 import { IAffiliateSuscription } from "../interfaces/affiliateSuscription.interface";
+import { toast } from "react-toast";
 
 export const RegisterSuscription: React.FC = () => {
 
@@ -57,13 +58,13 @@ export const RegisterSuscription: React.FC = () => {
       })
       .then((response: IResponse) => {
         if (response.success) {
-          alert(response.message);
+          toast.info(response.message);
         } else {
-          alert(response.message);
+          toast.warn(response.message);
         }
       })
-      .catch((error) => {
-        alert(error);
+      .catch((error: any) => {
+        toast.error(String(error));
       });
   };
 

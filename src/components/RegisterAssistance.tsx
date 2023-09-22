@@ -4,6 +4,7 @@ import { IAssistance } from "../interfaces/assistance.interface";
 import { API_CONFIG } from "../config/api.config";
 import { IResponse } from "../interfaces/api.interface";
 import { ResponsiveForm } from "./common/Form";
+import { toast } from "react-toast";
 
 export const RegisterAssistance: React.FC = () => {
 
@@ -31,13 +32,13 @@ export const RegisterAssistance: React.FC = () => {
       })
       .then((response: IResponse) => {
         if (response.success === true) {
-          alert(response.message);
+          toast.info(response.message);
         } else {
-          alert(response.message);
+          toast.warn(response.message);
         }
       })
-      .catch((error) => {
-        alert(error);
+      .catch((error: any) => {
+        toast.error(String(error));
       });
   };
 

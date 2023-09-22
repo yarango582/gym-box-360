@@ -4,6 +4,7 @@ import { IAffiliate } from "../interfaces";
 import { API_CONFIG } from "../config/api.config";
 import { IResponse } from "../interfaces/api.interface";
 import { ResponsiveForm } from "./common/Form";
+import { toast } from "react-toast";
 
 const { Option } = Select;
 
@@ -69,13 +70,13 @@ export const RegisterUser: React.FC = () => {
       })
       .then((response: IResponse) => {
         if (response.success) {
-          alert(response.message);
+          toast.info(response.message);
         } else {
-          alert(response.message);
+          toast.warn(response.message);
         }
       })
-      .catch((error) => {
-        alert(error);
+      .catch((error: any) => {
+        toast.error(String(error));
       });
 
   };
@@ -238,6 +239,17 @@ export const RegisterUser: React.FC = () => {
           <Option value="3">3</Option>
           <Option value="4">4</Option>
           <Option value="5">5</Option>
+        </Select>
+      </Form.Item>
+      <Form.Item
+        label="Sede de entrenamiento"
+        name="sede"
+        rules={[{ required: true, message: "Ingrese la sede a la que pertenece" }]}
+      >
+        <Select showSearch>
+          <Option value="jamundi">Jamuindi</Option>
+          <Option value="pobladoCampestre">Poblado Campestre</Option>
+          <Option value="casona">Casona</Option>
         </Select>
       </Form.Item>
     </ResponsiveForm>
