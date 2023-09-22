@@ -63,7 +63,7 @@ export const RegisterSuscription: React.FC = () => {
           toast.warn(response.message);
         }
       })
-      .catch((error: any) => {
+      .catch((error) => {
         toast.error(String(error));
       });
   };

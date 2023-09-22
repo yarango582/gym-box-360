@@ -75,7 +75,7 @@ export const RegisterUser: React.FC = () => {
           toast.warn(response.message);
         }
       })
-      .catch((error: any) => {
+      .catch((error) => {
         toast.error(String(error));
       });
 
