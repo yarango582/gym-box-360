@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import { Form, Button, Row, Col } from "antd";
 
 const { Item } = Form;
@@ -19,12 +19,14 @@ interface FormProps {
     text: string;
   };
   children?: ReactNode[] | ReactNode;
+  isLoading?: boolean;
 }
 
 export const ResponsiveForm: React.FC<FormProps> = ({
   onFinish,
   buttonOptions,
   children,
+  isLoading: loading = false,
 }) => {
   const { title, htmlType, type, text } = buttonOptions;
 
@@ -33,6 +35,7 @@ export const ResponsiveForm: React.FC<FormProps> = ({
   );
 
   const [form] = Form.useForm();
+
 
   const handleFinish = (values: any) => {
     onFinish(values);
@@ -49,7 +52,9 @@ export const ResponsiveForm: React.FC<FormProps> = ({
         ))}
         <Col xs={24} sm={12} md={8} lg={6}>
           <Form.Item>
-            <Button title={title} type={type} htmlType={htmlType}>{text}</Button>
+            <Button title={title} type={type} htmlType={htmlType} disabled={loading}>
+            {loading ? "Cargando..." : text}
+            </Button>
           </Form.Item>
         </Col>
       </Row>

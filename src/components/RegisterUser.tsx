@@ -43,8 +43,10 @@ const horariosOptions = [
 
 export const RegisterUser: React.FC = () => {
 
-  const onFinish = (values: IAffiliate) => {
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
+  const onFinish = (values: IAffiliate) => {
+    setIsLoading(true);
     const fechaIngreso = new Date(values.fechaIngreso);
     const fechaNacimiento = new Date(values.fechaNacimiento);
 
@@ -71,12 +73,15 @@ export const RegisterUser: React.FC = () => {
       .then((response: IResponse) => {
         if (response.success) {
           toast.info(response.message);
+          setIsLoading(false);
         } else {
           toast.warn(response.message);
+          setIsLoading(false);
         }
       })
       .catch((error) => {
         toast.error(String(error));
+        setIsLoading(false);
       });
 
   };
@@ -89,6 +94,7 @@ export const RegisterUser: React.FC = () => {
         text: "Registrar afiliado",
       }}
       onFinish={onFinish}
+      isLoading={isLoading}
     >
       <Form.Item
         label="Tipo de documento"

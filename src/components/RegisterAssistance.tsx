@@ -8,8 +8,10 @@ import { toast } from "react-toast";
 
 export const RegisterAssistance: React.FC = () => {
 
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const onFinish = (values: IAssistance) => {
+    setIsLoading(true);
     const today = new Date();
     const assistance: IAssistance = {
       ...values,
@@ -33,12 +35,15 @@ export const RegisterAssistance: React.FC = () => {
       .then((response: IResponse) => {
         if (response.success === true) {
           toast.info(response.message);
+          setIsLoading(false);
         } else {
           toast.warn(response.message);
+          setIsLoading(false);
         }
       })
       .catch((error) => {
         toast.error(String(error));
+        setIsLoading(false);
       });
   };
 
@@ -51,6 +56,7 @@ export const RegisterAssistance: React.FC = () => {
         text: "Registrar ingreso",
       }}
       onFinish={onFinish}
+      isLoading={isLoading}
     >
       <Form.Item
         id="document"

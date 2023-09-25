@@ -11,6 +11,7 @@ export const RegisterSuscription: React.FC = () => {
 
   const [affiliates, setAffiliates] = useState<IAffiliate[]>([]);
   const [affiliateSelect, setAffiliateSelect] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getAffiliates = () => {
     const { method, url } = API_CONFIG.endpoints.getAffiliates;
@@ -36,6 +37,7 @@ export const RegisterSuscription: React.FC = () => {
 
 
   const onFinish = (values: IAffiliateSuscription) => {
+    setIsLoading(true);
     const  {method, url} = API_CONFIG.endpoints.setAffiliatesSuscription;
     const [id] = affiliateSelect.split("-");
     const affiliateSuscription = {
@@ -59,12 +61,15 @@ export const RegisterSuscription: React.FC = () => {
       .then((response: IResponse) => {
         if (response.success) {
           toast.info(response.message);
+          setIsLoading(false);
         } else {
           toast.warn(response.message);
+          setIsLoading(false);
         }
       })
       .catch((error) => {
         toast.error(String(error));
+        setIsLoading(false);
       });
   };
 
@@ -77,6 +82,7 @@ export const RegisterSuscription: React.FC = () => {
         text: "Activar suscripcion",
       }}
       onFinish={onFinish}
+      isLoading={isLoading}
     >
       <Form.Item
         label="Seleccione un afiliado"
