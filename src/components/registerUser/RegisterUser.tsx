@@ -1,9 +1,9 @@
 import React from "react";
 import { Form, Input, Select, DatePicker } from "antd";
-import { IAffiliate } from "../interfaces";
-import { API_CONFIG } from "../config/api.config";
-import { IResponse } from "../interfaces/api.interface";
-import { ResponsiveForm } from "./common/Form";
+import { IAffiliate } from "../../interfaces";
+import { API_CONFIG } from "../../config/api.config";
+import { IResponse } from "../../interfaces/api.interface";
+import { ResponsiveForm } from "../common/Form";
 import { toast } from "react-toast";
 
 const { Option } = Select;

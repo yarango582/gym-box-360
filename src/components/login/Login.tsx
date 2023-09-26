@@ -1,18 +1,20 @@
 import { Button, Form, Input } from 'antd';
-import logo from '../assets/img/logo.png';
+import logo from '../../assets/img/logo.png';
 import { useNavigate } from 'react-router-dom';
-import { API_CONFIG } from '../config/api.config';
-import { IResponse } from '../interfaces/api.interface';
-import { useEffect } from 'react';
+import { API_CONFIG } from '../../config/api.config';
+import { IResponse } from '../../interfaces/api.interface';
+import useAuthStore from '../../store/login.store';
+
 
 type FieldType = {
-    numeroDocumento?: string;
-    contrasena?: string;
+    _id: string;
+    permissions: string [];
 };
 
 export const Login = () => {
 
     const navigate = useNavigate();
+    const { setAccessToken, setPermissions } = useAuthStore();
 
     const onFinish = (user: FieldType) => {
         const { method, url } = API_CONFIG.endpoints.login;
@@ -28,8 +30,14 @@ export const Login = () => {
             })
             .then((response: IResponse) => {
                 if (response.success) {
-                    localStorage.setItem('isLogged', 'true');
-                    navigate('/dashboard');
+                    if(response.data) {
+                        const { _id, permissions } = response.data;
+                        const id = _id as string;
+                        const permissionsArray = permissions as string [];
+                        setAccessToken(id);
+                        setPermissions(permissionsArray);
+                        navigate('/dashboard');
+                    }
                 } else {
                     alert(response.message);
                 }
@@ -38,13 +46,6 @@ export const Login = () => {
                 console.error('Error:', error);
             });
     };
-
-    useEffect(() => {
-        const isLogged = localStorage.getItem('isLogged');
-        if (isLogged) {
-            navigate('/dashboard');
-        }
-    }, [navigate]);
 
     return (
         <div style={{

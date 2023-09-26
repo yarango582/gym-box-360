@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Form, Input, Select } from "antd";
-import { API_CONFIG } from "../config/api.config";
-import { IResponse } from "../interfaces/api.interface";
-import { ResponsiveForm } from "./common/Form";
-import { IAffiliate } from "../interfaces";
-import { IAffiliateSuscription } from "../interfaces/affiliateSuscription.interface";
+import { API_CONFIG } from "../../config/api.config";
+import { IResponse } from "../../interfaces/api.interface";
+import { ResponsiveForm } from "../common/Form";
+import { IAffiliate } from "../../interfaces";
+import { IAffiliateSuscription } from "../../interfaces/affiliateSuscription.interface";
 import { toast } from "react-toast";
 
 export const RegisterSuscription: React.FC = () => {

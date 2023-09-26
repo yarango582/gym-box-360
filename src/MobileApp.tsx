@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Breadcrumb, Layout, theme, Menu, Row, Col } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
 import { RegisterAssistance, RegisterSuscription, RegisterUser } from './components';
-import { menuOptions } from './components/common/menuOptions';
+import { MenuOption, menuOptions } from './components/common/menuOptions';
 import { useNavigate } from 'react-router-dom';
+import useAuthStore from './store/login.store';
 
 const { Header, Content, Footer } = Layout;
 
@@ -12,12 +12,22 @@ const App: React.FC = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const { accessToken,  permissions, setAccessToken, setPermissions } = useAuthStore();
   const navigate = useNavigate();
-  const isLogged = localStorage.getItem('isLogged');
 
   const handleMenuClick = (key: string) => {
     setSelectedOption(key);
   };
+
+  const menuItems = menuOptions.map((option: MenuOption) => {
+    if (option.permissions.includes(permissions.map(permission => permission).join(''))) {
+      return {
+        ...option,
+        icon: option.icon,
+      }
+    }
+    return null;
+  });
 
   const renderSelectedComponent = () => {
 
@@ -28,16 +38,20 @@ const App: React.FC = () => {
         return <RegisterAssistance />;
       case '3':
         return <RegisterSuscription />;
-      case '4':
-        window.localStorage.removeItem('isLogged');
+        case '4':
+          if (accessToken !== '') {
+            setAccessToken('');
+            setPermissions([]);
+          }
     }
+
   };
 
   useEffect(() => {
-    if (isLogged !== 'true') {
+    if (!accessToken || accessToken === '') {
       navigate('/login');
     }
-  }, [isLogged, navigate]);
+  }, [accessToken, navigate]);
 
   return (
     <Layout>
@@ -54,20 +68,14 @@ const App: React.FC = () => {
               </h1>
             </div>
           </Col>
-          <Col span={12}>
-            <Menu theme="dark" mode="horizontal" style={{ justifyContent: 'right' }}>
-              <Menu.SubMenu key="actions" title="Acciones" icon={<DownOutlined />}>
-                {menuOptions.map((option) => (
-                  <Menu.Item
-                    icon={option.icon as JSX.Element}
-                    key={option.key}
-                    onClick={() => handleMenuClick(option.key)}
-                  >
-                    {option.label}
-                  </Menu.Item>
-                ))}
-              </Menu.SubMenu>
-            </Menu>
+          <Col span={6}>
+            <Menu
+              theme="dark"
+              defaultSelectedKeys={['1']}
+              mode="horizontal"
+              items={menuItems}
+              onClick={({ key }) => handleMenuClick(key.toString())}
+            />
           </Col>
         </Row>
       </Header>
