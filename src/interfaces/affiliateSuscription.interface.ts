@@ -5,4 +5,5 @@ export interface IAffiliateSuscription {
     medioDePago: string;
     activo: boolean;
     valorDePago: number;
+    mesesPagados: number;
 }

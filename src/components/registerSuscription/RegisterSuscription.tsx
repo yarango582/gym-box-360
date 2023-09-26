@@ -23,13 +23,42 @@ export const RegisterSuscription: React.FC = () => {
         if (response.success === true) {
           setAffiliates(response.data as IAffiliate[]);
         } else {
-          alert(response.message);
+          toast.warn(response.message);
         }
       })
       .catch((error) => {
-        alert(error);
+        toast.warn(error as string);
       });
   }
+
+  useEffect(() => {
+    const getAffiliateSuscription = () => {
+      const { method, url } = API_CONFIG.endpoints.getAffiliatesSuscription;
+      const urlWithParams = url.replace(":id", affiliateSelect);
+
+      fetch(urlWithParams, { method })
+        .then((response) => {
+          return response.json();
+        }
+        )
+        .then((response: IResponse) => {
+          if (response.success === true) {
+            const affiliateSuscription = response.data as IAffiliateSuscription;
+            const dateFormated = new Date(affiliateSuscription.fechaDePago).toISOString().split("T")[0];
+            toast.info(`Tienes una suscripcion activa desde el ${dateFormated.toString()}`);
+          } else {
+            toast.warn(response.message);
+          }
+        })
+        .catch((error) => {
+          toast.warn(error as string);
+        });
+
+    }
+    if (affiliateSelect) {
+      getAffiliateSuscription();
+    }
+  }, [affiliateSelect]);
 
   useEffect(() => {
     getAffiliates();
@@ -38,7 +67,7 @@ export const RegisterSuscription: React.FC = () => {
 
   const onFinish = (values: IAffiliateSuscription) => {
     setIsLoading(true);
-    const  {method, url} = API_CONFIG.endpoints.setAffiliatesSuscription;
+    const { method, url } = API_CONFIG.endpoints.setAffiliatesSuscription;
     const [id] = affiliateSelect.split("-");
     const affiliateSuscription = {
       idAfiliado: id,
@@ -46,6 +75,7 @@ export const RegisterSuscription: React.FC = () => {
       medioDePago: values.medioDePago,
       activo: true,
       valorDePago: values.valorDePago,
+      mesesPagados: values.mesesPagados,
     }
     const options = {
       method,
@@ -106,7 +136,7 @@ export const RegisterSuscription: React.FC = () => {
 
       </Form.Item>
       <Form.Item
-        label="Fecha de Inicio"
+        label="Fecha de inicio"
         name="fechaDePago"
         rules={[{ required: true, message: "Ingrese la fecha de inicio" }]}
       >
@@ -127,6 +157,13 @@ export const RegisterSuscription: React.FC = () => {
       <Form.Item
         label="Valor"
         name="valorDePago"
+        rules={[{ required: true, message: "Ingrese el valor" }]}
+      >
+        <Input type="number" />
+      </Form.Item>
+      <Form.Item
+        label="Cantidad de meses pagados"
+        name="mesesPagados"
         rules={[{ required: true, message: "Ingrese el valor" }]}
       >
         <Input type="number" />

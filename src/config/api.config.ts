@@ -23,6 +23,10 @@ export const API_CONFIG = {
             method: 'POST',
             url: `${BASE_URL}/api/v1/affiliatesSuscription`
         },
+        getAffiliatesSuscription: {
+            method: 'GET',
+            url: `${BASE_URL}/api/v1/affiliatesSuscription/:id`
+        },
         setPayments: {
             method: 'POST',
             url: `${BASE_URL}/api/v1/payments`
