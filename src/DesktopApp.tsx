@@ -4,6 +4,7 @@ import { RegisterUser, RegisterAssistance, RegisterSuscription } from './compone
 import { MenuOption, menuOptions } from './components/common/menuOptions';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from './store/login.store';
+import logo from './assets/img/logo.png';
 
 const { Header, Content, Sider, Footer } = Layout;
 
@@ -63,9 +64,7 @@ const App: React.FC = () => {
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
         <div className="demo-logo" style={{ textAlign: 'center' }}>
-          <h1 style={{ color: 'white', fontSize: '24px', fontFamily: "'Carter One', cursive" }}>
-            GYM BOX 360
-          </h1>
+          <img src={logo} alt="logo" style={{ width: '100%', height: '100%', padding: '20px' }} />
         </div>
         <Menu
           theme="dark"
