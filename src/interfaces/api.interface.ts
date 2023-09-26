@@ -4,5 +4,7 @@ export interface IResponse {
     _id: string;
     message: string;
     success: boolean;
-    data?: any;
+    data?: {
+        [key: string]: any;
+    };
 }

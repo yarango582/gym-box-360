@@ -1,9 +1,9 @@
 import React from "react";
 import { Form, Input } from "antd";
-import { IAssistance } from "../interfaces/assistance.interface";
-import { API_CONFIG } from "../config/api.config";
-import { IResponse } from "../interfaces/api.interface";
-import { ResponsiveForm } from "./common/Form";
+import { IAssistance } from "../../interfaces/assistance.interface";
+import { API_CONFIG } from "../../config/api.config";
+import { IResponse } from "../../interfaces/api.interface";
+import { ResponsiveForm } from "../common/Form";
 import { toast } from "react-toast";
 
 export const RegisterAssistance: React.FC = () => {
