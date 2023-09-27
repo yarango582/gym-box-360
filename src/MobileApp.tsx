@@ -17,11 +17,6 @@ const App: React.FC = () => {
   const navigate = useNavigate();
 
   const handleMenuClick = (key: string) => {
-    if (key === 'logout') {
-      setAccessToken('');
-      setPermissions([]);
-      navigate('/login');
-    }
     setSelectedOption(key);
   };
 
@@ -37,16 +32,20 @@ const App: React.FC = () => {
 
   const renderSelectedComponent = () => {
 
+    const logout = () => {
+      setAccessToken('');
+      setPermissions([]);
+      navigate('/login');
+    }
+
     const options = {
       '1': <RegisterUser />,
       '2': <RegisterAssistance />,
       '3': <RegisterSuscription />,
       'sub-5': <AssisteancesOfTheDay />,
-      'logout': null,
     }
 
-    return options[selectedOption as keyof typeof options];
-
+    return options[selectedOption as keyof typeof options] || logout();
   };
 
   useEffect(() => {
