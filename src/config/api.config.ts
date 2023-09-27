@@ -11,12 +11,20 @@ export const API_CONFIG = {
             method: 'GET',
             url: `${BASE_URL}/api/v1/affiliates`
         },
+        getAffiliateByNumeroDocumento: {
+            method: 'GET',
+            url: `${BASE_URL}/api/v1/affiliates/:numeroDocumento`
+        },
         setAffiliate: {
             method: 'POST',
             url: `${BASE_URL}/api/v1/affiliates`
         },
         setAssistance: {
             method: 'POST',
+            url: `${BASE_URL}/api/v1/assistance`
+        },
+        getAssistances: {
+            method: 'GET',
             url: `${BASE_URL}/api/v1/assistance`
         },
         setAffiliatesSuscription: {

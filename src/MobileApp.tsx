@@ -4,6 +4,7 @@ import { RegisterAssistance, RegisterSuscription, RegisterUser } from './compone
 import { MenuOption, menuOptions } from './components/common/menuOptions';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from './store/login.store';
+import { AssisteancesOfTheDay } from './components/assistances/assistancesOfTheDay';
 
 const { Header, Content, Footer } = Layout;
 
@@ -12,10 +13,15 @@ const App: React.FC = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const { accessToken,  permissions, setAccessToken, setPermissions } = useAuthStore();
+  const { accessToken, permissions, setAccessToken, setPermissions } = useAuthStore();
   const navigate = useNavigate();
 
   const handleMenuClick = (key: string) => {
+    if (key === 'logout') {
+      setAccessToken('');
+      setPermissions([]);
+      navigate('/login');
+    }
     setSelectedOption(key);
   };
 
@@ -31,19 +37,15 @@ const App: React.FC = () => {
 
   const renderSelectedComponent = () => {
 
-    switch (selectedOption) {
-      case '1':
-        return <RegisterUser />;
-      case '2':
-        return <RegisterAssistance />;
-      case '3':
-        return <RegisterSuscription />;
-        case '4':
-          if (accessToken !== '') {
-            setAccessToken('');
-            setPermissions([]);
-          }
+    const options = {
+      '1': <RegisterUser />,
+      '2': <RegisterAssistance />,
+      '3': <RegisterSuscription />,
+      'sub-5': <AssisteancesOfTheDay />,
+      'logout': null,
     }
+
+    return options[selectedOption as keyof typeof options];
 
   };
 
@@ -71,11 +73,43 @@ const App: React.FC = () => {
           <Col span={6}>
             <Menu
               theme="dark"
-              defaultSelectedKeys={['1']}
+              defaultSelectedKeys={['2']}
               mode="horizontal"
-              items={menuItems}
               onClick={({ key }) => handleMenuClick(key.toString())}
-            />
+            >
+              {menuItems.map((option) => {
+                if (option) {
+                  if (option.subMenuOptions) {
+                    return (
+                      <Menu.SubMenu
+                        key={`${option.key}-${option.label}`}
+                        icon={option.icon}
+                        title={option.label}
+                        popupOffset={[ -130, 0]}
+                      >
+                        {option.subMenuOptions.map((subOption) => {
+                          if (subOption) {
+                            return (
+                              <Menu.Item key={subOption.key} icon={subOption.icon}>
+                                {subOption.label}
+                              </Menu.Item>
+                            );
+                          }
+                          return null;
+                        })}
+                      </Menu.SubMenu>
+                    );
+                  }
+                  return (
+                    <Menu.Item key={option.key} icon={option.icon}>
+                      {option.label}
+                    </Menu.Item>
+                  );
+                }
+                return null;
+              }
+              )}
+            </Menu>
           </Col>
         </Row>
       </Header>
