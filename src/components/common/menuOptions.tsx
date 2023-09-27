@@ -11,13 +11,19 @@ export interface MenuOption {
   subMenuOptions?: MenuOption[];
 }
 
-export const subMenuOptions: MenuOption[] = [
+const subMenuOptionsAsistencias: MenuOption[] = [
   {
     key: 'sub-5',
     label: 'Asistencias del dia',
     icon: <PieChartOutlined />,
     permissions: [Permissions.all],
   },
+  {
+    key: 'sub-6',
+    label: 'Inasistencia del dia',
+    icon: <PieChartOutlined />,
+    permissions: [Permissions.all],
+  }
 ]
 
 export const menuOptions: MenuOption[] = [
@@ -44,7 +50,7 @@ export const menuOptions: MenuOption[] = [
     label: 'Asistencias',
     icon: <CaretRightOutlined />,
     permissions: [Permissions.all],
-    subMenuOptions: subMenuOptions,
+    subMenuOptions: subMenuOptionsAsistencias,
   },
   {
     key: '4',
