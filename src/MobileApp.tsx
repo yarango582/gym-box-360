@@ -5,6 +5,7 @@ import { MenuOption, menuOptions } from './components/common/menuOptions';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from './store/login.store';
 import { AssisteancesOfTheDay } from './components/assistances/assistancesOfTheDay';
+import { NonAttendance } from './components/assistances/nonAttendance';
 
 const { Header, Content, Footer } = Layout;
 
@@ -43,9 +44,11 @@ const App: React.FC = () => {
       '2': <RegisterAssistance />,
       '3': <RegisterSuscription />,
       'sub-5': <AssisteancesOfTheDay />,
+      'sub-6': <NonAttendance />,
     }
 
     return options[selectedOption as keyof typeof options] || logout();
+
   };
 
   useEffect(() => {

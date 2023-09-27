@@ -23,9 +23,13 @@ export const API_CONFIG = {
             method: 'POST',
             url: `${BASE_URL}/api/v1/assistance`
         },
-        getAssistances: {
+        getAssistancesToday: {
             method: 'GET',
-            url: `${BASE_URL}/api/v1/assistance`
+            url: `${BASE_URL}/api/v1/assistancesToday`
+        },
+        nonAttendance: {
+            method: 'GET',
+            url: `${BASE_URL}/api/v1/nonAttendance`
         },
         setAffiliatesSuscription: {
             method: 'POST',
