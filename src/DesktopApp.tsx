@@ -5,6 +5,7 @@ import { MenuOption, menuOptions } from './components/common/menuOptions';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from './store/login.store';
 import logo from './assets/img/logo.png';
+import { AssisteancesOfTheDay } from './components/assistances/assistancesOfTheDay';
 
 const { Header, Content, Sider, Footer } = Layout;
 
@@ -22,6 +23,15 @@ const App: React.FC = () => {
       return {
         ...option,
         icon: option.icon,
+        subMenuOptions: option.subMenuOptions?.map((subOption: MenuOption) => {
+          if (subOption.permissions.includes(permissions.map(permission => permission).join(''))) {
+            return {
+              ...subOption,
+              icon: subOption.icon,
+            };
+          }
+          return null;
+        }),
       }
     }
     return null;
@@ -32,24 +42,25 @@ const App: React.FC = () => {
   } = theme.useToken();
 
   const handleMenuClick = (key: string) => {
+    if(key === 'logout') {
+      setAccessToken('');
+      setPermissions([]);
+      navigate('/login');
+    }
     setSelectedOption(key);
   };
 
   const renderSelectedComponent = () => {
 
-    switch (selectedOption) {
-      case '1':
-        return <RegisterUser />;
-      case '2':
-        return <RegisterAssistance />;
-      case '3':
-        return <RegisterSuscription />;
-      case '4':
-        if (accessToken !== '') {
-          setAccessToken('');
-          setPermissions([]);
-        }
+    const options = {
+      '1': <RegisterUser />,
+      '2': <RegisterAssistance />,
+      '3': <RegisterSuscription />,
+      'sub-5': <AssisteancesOfTheDay />,
+      'logout': null,
     }
+
+    return options[selectedOption as keyof typeof options];
 
   };
 
@@ -68,11 +79,41 @@ const App: React.FC = () => {
         </div>
         <Menu
           theme="dark"
-          defaultSelectedKeys={['1']}
-          mode="inline"
-          items={menuItems}
+          defaultSelectedKeys={['2']}
           onClick={({ key }) => handleMenuClick(key.toString())}
-        />
+        >
+          {menuItems.map((option) => {
+            if (option) {
+              if (option.subMenuOptions) {
+                return (
+                  <Menu.SubMenu
+                    key={`${option.key}-${option.label}`}
+                    icon={option.icon}
+                    title={option.label}
+                  >
+                    {option.subMenuOptions.map((subOption) => {
+                      if (subOption) {
+                        return (
+                          <Menu.Item key={subOption.key} icon={subOption.icon}>
+                            {subOption.label}
+                          </Menu.Item>
+                        );
+                      }
+                      return null;
+                    })}
+                  </Menu.SubMenu>
+                );
+              }
+              return (
+                <Menu.Item key={option.key} icon={option.icon}>
+                  {option.label}
+                </Menu.Item>
+              );
+            }
+            return null;
+          }
+          )}
+        </Menu>
       </Sider>
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }} />
