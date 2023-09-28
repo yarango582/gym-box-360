@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { useEffect, useState } from "react";
 import { toast } from "react-toast";
 import { API_CONFIG } from '../../config/api.config';
@@ -8,14 +8,12 @@ import { IResponse } from "../../interfaces/api.interface";
 import { IAssistance } from "../../interfaces/assistance.interface";
 import './style.css';
 
-
 interface IAssistancesWithAffiliate extends IAssistance {
     affiliate: IAffiliate;
     suscription: IAffiliateSuscription;
 }
 
 export const AssisteancesOfTheDay = () => {
-
 
     const [assistancesToday, setAssistancesToday] = useState<IAssistancesWithAffiliate[]>([]);
 
@@ -66,7 +64,7 @@ export const AssisteancesOfTheDay = () => {
                                 (
                                     <tr  key={index}>
                                         <td>{index + 1}</td>
-                                        <td>{moment(assistance.fechaDeAsistencia).utcOffset(-5).format('YYYY-MM-DD:HH:mm:ss')}</td>
+                                        <td>{moment(assistance.fechaDeAsistencia).tz('America/Bogota').format('YYYY-MM-DD:HH:mm:ss')}</td>
                                         <td>{assistance.affiliate.numeroDocumento}</td>
                                         <td>{assistance.affiliate.nombreCompleto}</td>
                                         <td>{assistance.affiliate.celular}</td>
