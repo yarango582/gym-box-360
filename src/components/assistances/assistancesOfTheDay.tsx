@@ -66,7 +66,7 @@ export const AssisteancesOfTheDay = () => {
                                 (
                                     <tr  key={index}>
                                         <td>{index + 1}</td>
-                                        <td>{moment(assistance.fechaDeAsistencia).utcOffset(-5).format('YYYY-DD-MM')}</td>
+                                        <td>{moment(assistance.fechaDeAsistencia).utcOffset(-5).format('YYYY-MM-DD:HH:mm:ss')}</td>
                                         <td>{assistance.affiliate.numeroDocumento}</td>
                                         <td>{assistance.affiliate.nombreCompleto}</td>
                                         <td>{assistance.affiliate.celular}</td>
