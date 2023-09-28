@@ -8,20 +8,14 @@ import './style.css';
 import { IAffiliateSuscription } from "../../interfaces/affiliateSuscription.interface";
 
 
-interface NonAttendanceAffiliate {
-    affiliate: {
-        status: string;
-        value: {
-            _id: string;
-            idAfiliado: IAffiliate;
-        } & IAffiliateSuscription;
-    }
+interface NonAttendanceAffiliate extends IAffiliateSuscription {
+    idAfiliado: IAffiliate;
 }
 
 export const NonAttendance = () => {
 
 
-    const [nonAttendanceAffiliate, setNonAttendanceAffiliate] = useState<NonAttendanceAffiliate[]>([]);
+    const [nonAttendanceAffiliate, setNonAttendanceAffiliate] = useState<NonAttendanceAffiliate []>([]);
 
     const getNonAttendance = () => {
         const { method, url } = API_CONFIG.endpoints.nonAttendance;
@@ -35,14 +29,7 @@ export const NonAttendance = () => {
             .then((response: IResponse) => {
                 if (response.success) {
                     const nonAttendance = response.data as NonAttendanceAffiliate[];
-                    const affiliatesNonAttendanceSet: Set<NonAttendanceAffiliate>  = new Set();
-                    nonAttendance.forEach((nonAttendance) => {
-                        // cumprueba que el objeto no este vacio
-                        if (Object.keys(nonAttendance).length !== 0) {
-                            affiliatesNonAttendanceSet.add(nonAttendance);
-                        }
-                    });
-                    setNonAttendanceAffiliate(Array.from(affiliatesNonAttendanceSet));
+                    setNonAttendanceAffiliate(nonAttendance);
                 } else {
                     toast.error(response.message);
                 }
@@ -74,9 +61,9 @@ export const NonAttendance = () => {
                                 return (
                                     <tr key={index}>
                                         <td>{index + 1}</td>
-                                        <td>{affiliate.affiliate.value.idAfiliado.nombreCompleto}</td>
-                                        <td>{affiliate.affiliate.value.idAfiliado.celular}</td>
-                                        <td>{affiliate.affiliate.value.activo ? 'SI' : 'NO'}</td>
+                                        <td>{affiliate.idAfiliado.nombreCompleto}</td>
+                                        <td>{affiliate.idAfiliado.celular}</td>
+                                        <td>{affiliate.activo ? 'SI' : 'NO'}</td>
                                     </tr>
                                 )
                             })
