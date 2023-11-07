@@ -16,13 +16,13 @@ const subMenuOptionsAsistencias: MenuOption[] = [
     key: 'sub-5',
     label: 'Asistencias del dia',
     icon: <PieChartOutlined />,
-    permissions: [Permissions.all],
+    permissions: [Permissions.all, Permissions.onSite],
   },
   {
     key: 'sub-6',
     label: 'Inasistencia del dia',
     icon: <PieChartOutlined />,
-    permissions: [Permissions.all],
+    permissions: [Permissions.all, Permissions.onSite],
   }
 ]
 
@@ -49,7 +49,7 @@ export const menuOptions: MenuOption[] = [
     key: '5',
     label: 'Asistencias',
     icon: <CaretRightOutlined />,
-    permissions: [Permissions.all],
+    permissions: [Permissions.all, Permissions.onSite],
     subMenuOptions: subMenuOptionsAsistencias,
   },
   {

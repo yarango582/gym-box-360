@@ -23,6 +23,10 @@ export const API_CONFIG = {
             method: 'POST',
             url: `${BASE_URL}/api/v1/assistance`
         },
+        getAssistances: {
+            method: 'GET',
+            url: `${BASE_URL}/api/v1/assistance`
+        },
         getAssistancesToday: {
             method: 'GET',
             url: `${BASE_URL}/api/v1/assistancesToday`
